@@ -1,0 +1,51 @@
+name: Run API Tests and Publish Allure Report
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Run tests with Maven
+        run: mvn clean test -pl test-api
+
+      - name: Generate Allure Report
+        run: mvn allure:report -pl test-api
+
+      - name: Copy Allure report to docs folder
+        run: |
+          mkdir -p docs
+          cp -r test-api/target/site/allure-maven-plugin/* docs/
+
+      - name: Add .nojekyll
+        run: |
+          mkdir -p docs
+          echo "" > docs/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
