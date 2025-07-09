@@ -19,19 +19,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Feature("Booking Management - Negative Tests")
 public class CreateBookingNegativeTests {
 
-    private AuthService authService;
-    private BookingService bookingService;
-    private String token;
-
     private static final String BASE_URL = ConfigReader.get("base.url");
 
     private Response lastResponse;
 
     @BeforeClass
     public void setup() {
-        authService = new AuthService();
-        bookingService = new BookingService();
-        token = authService.getAuthToken();
+        AuthService authService = new AuthService();
+        BookingService bookingService = new BookingService();
+        String token = authService.getAuthToken();
     }
 
     @DataProvider(name = "negativeBookings")
