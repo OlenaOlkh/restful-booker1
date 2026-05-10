@@ -57,6 +57,7 @@ The framework covers:
 ## How to Run Tests
 
 ### Run API tests
+
 ```bash
 mvn -pl test-api clean test
 ```
