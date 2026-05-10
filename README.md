@@ -1,35 +1,37 @@
 # RESTful Booker Automation Project
 
-This repository contains a multi-module Maven project with automated tests for both API and UI layers of the RESTful Booker system.
+This repository contains a multi-module Maven project with automated tests for both API layers of the RESTful Booker system.
 
 ## Purpose
 
-The goal of this framework is to ensure reliable regression coverage and high-quality software delivery through automated testing of both API and UI layers.
+The goal of this framework is to ensure reliable regression coverage and high-quality software delivery through automated testing of the API layer.
 
 It focuses on:
 
 - scalable automation design  
-- separation of API and UI test layers  
+- separation of API test layers  
 - maintainable test architecture  
 - regression stability  
 
+---
+
 ## Modules
 
-- [`test-api`](./test-api): API tests using **Java + RestAssured + TestNG**  
-- [`test-ui`](./test-ui): UI tests using **Java + Selenide + TestNG**
+- [`test-api`](./test-api): API tests using **Java + RestAssured + TestNG**
+
+---
 
 - ## Project Structure
 
 ```
 restful-booker1/
 ├── test-api/           # API tests (RestAssured)
-├── test-ui/            # UI tests (Selenide)
 ├── pom.xml             # Parent POM
 └── README.md
 ```
 ## Key Design Principles
 
-- Separation of concerns (API vs UI)  
+- Separation of concerns (API only)  
 - Reusable and maintainable test structure  
 - Modular Maven architecture  
 - Clean dependency management  
@@ -40,20 +42,17 @@ The framework covers:
 
 - REST API CRUD operations validation  
 - Positive and negative test scenarios  
-- UI validation of booking flows  
-- Regression testing of critical application paths  
+- Regression testing of critical API paths  
 - Response validation (status codes, payload structure)  
-- Cross-layer consistency checks  
+- Cross-layer consistency checks 
 
 ## Technologies Used
 
 - Java 17  
 - Maven  
 - RestAssured  
-- Selenide  
 - TestNG  
-- Allure Reports (optional integration)  
-- Page Object Pattern (for UI tests)  
+- Allure Reports (optional integration) 
 
 ## How to Run Tests
 
@@ -61,12 +60,6 @@ The framework covers:
 ```bash
 mvn -pl test-api clean test
 ```
-
-### Run UI tests
-```bash
-mvn -pl test-ui clean test
-```
-
 ### Run all modules
 ```bash
 mvn clean install
